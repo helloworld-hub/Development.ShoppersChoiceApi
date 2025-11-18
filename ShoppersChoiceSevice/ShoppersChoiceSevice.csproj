@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ShoppersChoice.DataAccess\ShoppersChoice.DataAccess.csproj" />
     <ProjectReference Include="..\ShoppersChoice.Entities\ShoppersChoice.Entities.csproj" />
   </ItemGroup>
