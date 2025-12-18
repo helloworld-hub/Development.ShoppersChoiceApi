@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoppersChoiceSevice.MySQLDbContext;
 
@@ -10,9 +11,11 @@ using ShoppersChoiceSevice.MySQLDbContext;
 namespace ShoppersChoice.DataAccess.Migrations
 {
     [DbContext(typeof(MySQLDBContext))]
-    partial class MySQLDBContextModelSnapshot : ModelSnapshot
+    [Migration("20251129143338_Added category class")]
+    partial class Addedcategoryclass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,27 +23,6 @@ namespace ShoppersChoice.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ShoppersChoice.Entities.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("imageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
 
             modelBuilder.Entity("ShoppersChoice.Entities.Product", b =>
                 {
@@ -62,10 +44,7 @@ namespace ShoppersChoice.DataAccess.Migrations
                     b.Property<int?>("discountPercent")
                         .HasColumnType("int");
 
-                    b.PrimitiveCollection<string>("images")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("name")
+                    b.Property<string>("images")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("price")
@@ -80,7 +59,7 @@ namespace ShoppersChoice.DataAccess.Migrations
                     b.Property<int?>("stock")
                         .HasColumnType("int");
 
-                    b.Property<string>("thumbnails")
+                    b.Property<string>("title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

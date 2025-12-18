@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoppersChoiceSevice.MySQLDbContext;
 
@@ -10,9 +11,11 @@ using ShoppersChoiceSevice.MySQLDbContext;
 namespace ShoppersChoice.DataAccess.Migrations
 {
     [DbContext(typeof(MySQLDBContext))]
-    partial class MySQLDBContextModelSnapshot : ModelSnapshot
+    [Migration("20251218101032_Changed Product Model1")]
+    partial class ChangedProductModel1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

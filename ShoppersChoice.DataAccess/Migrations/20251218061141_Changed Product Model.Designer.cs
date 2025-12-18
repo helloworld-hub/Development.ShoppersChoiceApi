@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoppersChoiceSevice.MySQLDbContext;
 
@@ -10,9 +11,11 @@ using ShoppersChoiceSevice.MySQLDbContext;
 namespace ShoppersChoice.DataAccess.Migrations
 {
     [DbContext(typeof(MySQLDBContext))]
-    partial class MySQLDBContextModelSnapshot : ModelSnapshot
+    [Migration("20251218061141_Changed Product Model")]
+    partial class ChangedProductModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +65,7 @@ namespace ShoppersChoice.DataAccess.Migrations
                     b.Property<int?>("discountPercent")
                         .HasColumnType("int");
 
-                    b.PrimitiveCollection<string>("images")
+                    b.Property<string>("images")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
@@ -80,8 +83,8 @@ namespace ShoppersChoice.DataAccess.Migrations
                     b.Property<int?>("stock")
                         .HasColumnType("int");
 
-                    b.Property<string>("thumbnails")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("thumbnals")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

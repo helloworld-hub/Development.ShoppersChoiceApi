@@ -5,15 +5,14 @@ namespace ShoppersChoice.Entities
     public class Product
     {
         public int Id { get; set; }
-        public string title { get; set; }
+        public string? name { get; set; }
+        public string? description { get; set; }
 
-        public string description { get; set; }
-
-        public double price { get; set; }
+        public double? price { get; set; }
 
         public int? discountPercent { get; set; }
 
-        public string? images { get; set; }
+        public List<string>? images { get; set; }
 
         public string? sizes { get; set;}
 
@@ -24,6 +23,8 @@ namespace ShoppersChoice.Entities
         public string? createdAt { get; set; }
 
         public int? stock {  get; set; }
+
+        public string? thumbnails { get; set; }
 
     }
 }
