@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppersChoiceSevice", "ShoppersChoiceSevice\ShoppersChoiceSevice.csproj", "{EB265854-9951-48ED-A425-C653E99336A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppersChoiceSevice", "ShoppersChoiceSevice\ShoppersChoiceSevice.csproj", "{EB265854-9951-48ED-A425-C653E99336A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppersChoice.DataAccess", "ShoppersChoice.DataAccess\ShoppersChoice.DataAccess.csproj", "{384ABA05-8D28-41B6-B652-23DEDB902237}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppersChoice.DataAccess", "ShoppersChoice.DataAccess\ShoppersChoice.DataAccess.csproj", "{384ABA05-8D28-41B6-B652-23DEDB902237}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppersChoice.Entities", "ShoppersChoice.Entities\ShoppersChoice.Entities.csproj", "{9A6FE20B-7679-4234-AF4D-0F9B2D4E68D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppersChoice.Entities", "ShoppersChoice.Entities\ShoppersChoice.Entities.csproj", "{9A6FE20B-7679-4234-AF4D-0F9B2D4E68D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppersChoice.Utilities", "ShoppersChoice.Utilities\ShoppersChoice.Utilities.csproj", "{C69DFB01-B546-4C86-BC76-D02E0099833E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{9A6FE20B-7679-4234-AF4D-0F9B2D4E68D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A6FE20B-7679-4234-AF4D-0F9B2D4E68D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A6FE20B-7679-4234-AF4D-0F9B2D4E68D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C69DFB01-B546-4C86-BC76-D02E0099833E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C69DFB01-B546-4C86-BC76-D02E0099833E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C69DFB01-B546-4C86-BC76-D02E0099833E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C69DFB01-B546-4C86-BC76-D02E0099833E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
