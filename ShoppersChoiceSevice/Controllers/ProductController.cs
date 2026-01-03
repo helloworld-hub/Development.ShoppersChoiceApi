@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShoppersChoice.DataAccess.NewFolder2;
 using ShoppersChoice.Entities;
+using ShoppersChoice.Entities.DTOs;
 using ShoppersChoiceSevice.MySQLDbContext;
 
 namespace ShoppersChoiceSevice.Controllers
@@ -46,6 +47,23 @@ namespace ShoppersChoiceSevice.Controllers
                 return NotFound();
 
             return Ok(updatedProduct);
+        }
+
+        [HttpPost]
+        [Route("page")]
+        public async Task<IActionResult> GetProducts(string? category, int page = 1, int pageSize = 10)
+        {
+            var result = await productRepos.GetProducts(category, page, pageSize);
+            var totalRecords = result.TotalRecords;
+
+            return Ok(new PaginatedResponseDto<Product>
+            {
+                Data = result.Data,
+                TotalRecords = totalRecords,
+                Page = page,
+                PageSize = pageSize,
+                TotalPages = (int)Math.Ceiling((double)totalRecords / pageSize)
+            });
         }
 
 

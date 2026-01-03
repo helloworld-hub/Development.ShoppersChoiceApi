@@ -1,9 +1,6 @@
 ﻿using ShoppersChoice.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ShoppersChoice.Entities.DTOs;
+
 
 namespace ShoppersChoice.DataAccess.NewFolder2
 {
@@ -12,5 +9,7 @@ namespace ShoppersChoice.DataAccess.NewFolder2
       Task<List<Product>> AddProductAsync(List<Product> productRequest);
 
         Task<Product?> UpdateProductPartialAsync(int id, ProductUpdateDto dto);
+
+        Task<PaginatedResponseDto<Product>> GetProducts(string? category, int page = 1, int pageSize = 10);
     }
 }

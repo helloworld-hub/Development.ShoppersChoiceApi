@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ShoppersChoice.DataAccess.NewFolder2;
 using ShoppersChoice.Entities;
+using ShoppersChoice.Entities.DTOs;
 using ShoppersChoiceSevice.MySQLDbContext;
 
 namespace ShoppersChoice.DataAccess.NewFolder1
@@ -40,6 +41,33 @@ namespace ShoppersChoice.DataAccess.NewFolder1
 
             await mySQLDBContext.SaveChangesAsync();
             return product;
+        }
+
+        public async Task<PaginatedResponseDto<Product>> GetProducts(string? category, int page = 1, int pageSize = 10)
+        {
+            var query = mySQLDBContext.Products.AsQueryable();
+
+            if (!string.IsNullOrEmpty(category))
+                query = query.Where(p => p.category == category);
+
+            int totalRecords = query.Count();
+
+            var products = query
+                .OrderBy(p => p.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            var response = new PaginatedResponseDto<Product>
+            {
+                    Data = products,       
+                TotalRecords = totalRecords,
+                Page = page,
+                PageSize = pageSize
+            };
+
+            return response;
+
         }
 
     }

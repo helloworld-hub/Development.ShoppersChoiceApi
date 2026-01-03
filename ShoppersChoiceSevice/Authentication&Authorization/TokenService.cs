@@ -44,7 +44,7 @@ namespace ShoppersChoice.Utilities.Authentication_Authorization
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddDays(7),  // Token valid for 7 days
+                expires: DateTime.Now.AddDays(1),  // Token valid for 7 days
                 signingCredentials: credentials
             );
 
