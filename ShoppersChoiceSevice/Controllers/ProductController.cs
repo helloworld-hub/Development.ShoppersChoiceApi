@@ -66,6 +66,22 @@ namespace ShoppersChoiceSevice.Controllers
             });
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchProducts([FromQuery] string q)
+        {
+            if (string.IsNullOrWhiteSpace(q))
+                return Ok(new List<object>());
+
+            var products = await productRepos.SearchProducts(q);
+
+            return Ok(products.Select(p => new
+            {
+                p.Id,
+                p.name
+            }));
+        }
+
+
 
     }
 }

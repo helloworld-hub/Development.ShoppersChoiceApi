@@ -70,5 +70,15 @@ namespace ShoppersChoice.DataAccess.NewFolder1
 
         }
 
+        public async Task<List<Product>> SearchProducts(string search)
+        {
+            return await mySQLDBContext.Products
+                .Where(p => p.name.Contains(search))
+                .OrderBy(p => p.name)
+                .Take(10)
+                .ToListAsync();
+        }
+
+
     }
 }
