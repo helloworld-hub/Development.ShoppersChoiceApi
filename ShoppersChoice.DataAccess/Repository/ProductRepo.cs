@@ -15,6 +15,11 @@ namespace ShoppersChoice.DataAccess.NewFolder1
             this.mySQLDBContext = mySQLDBContext;
         }
 
+        /// <summary>
+        /// Method to add products.
+        /// </summary>
+        /// <param name="productRequest"></param>
+        /// <returns></returns>
        public async Task<List<Product>> AddProductAsync(List<Product> productRequest)
         {  
 
@@ -24,6 +29,12 @@ namespace ShoppersChoice.DataAccess.NewFolder1
             return productRequest;
         }
 
+        /// <summary>
+        /// Method to update the products partially.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public async Task<Product?> UpdateProductPartialAsync(int id, ProductUpdateDto dto)
         {
             var product = await mySQLDBContext.Products
@@ -43,6 +54,13 @@ namespace ShoppersChoice.DataAccess.NewFolder1
             return product;
         }
 
+        /// <summary>
+        /// Method to get the products.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         public async Task<PaginatedResponseDto<Product>> GetProducts(string? category, int page = 1, int pageSize = 10)
         {
             var query = mySQLDBContext.Products.AsQueryable();
@@ -70,6 +88,11 @@ namespace ShoppersChoice.DataAccess.NewFolder1
 
         }
 
+        /// <summary>
+        /// Method to search the products.
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
         public async Task<List<Product>> SearchProducts(string search)
         {
             return await mySQLDBContext.Products
