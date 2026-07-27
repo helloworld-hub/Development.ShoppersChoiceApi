@@ -4,8 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ShoppersChoice.DataAccess.Contracts;
 using ShoppersChoice.DataAccess.NewFolder1;
 using ShoppersChoice.DataAccess.NewFolder2;
+using ShoppersChoice.DataAccess.Repository;
 using ShoppersChoice.Utilities.Authentication_Authorization;
 using ShoppersChoiceSevice.Authentication_Authorization;
 using ShoppersChoiceSevice.MySQLDbContext;
@@ -52,6 +54,8 @@ builder.Services.AddAuthentication(options =>
 // Add services to the container.
 builder.Services.AddScoped<IProductRepos, ProductRepo>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IOrderRepos, OrderRepos>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
