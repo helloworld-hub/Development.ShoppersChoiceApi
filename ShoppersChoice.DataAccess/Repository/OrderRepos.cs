@@ -14,11 +14,11 @@ namespace ShoppersChoice.DataAccess.Repository
     {
         private readonly MySQLDBContext _context;
 
-        private readonly HttpContextAccessor _httpContextAccessor; 
-        public OrderRepos(MySQLDBContext context, HttpContextAccessor httpContextAccessor)
+        private readonly IHttpContextAccessor _httpContextAccessor; 
+        public OrderRepos(MySQLDBContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
-            _httpContextAccessor = _httpContextAccessor;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<List<OrderResponseDto>> GetOrders()

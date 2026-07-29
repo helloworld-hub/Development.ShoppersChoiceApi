@@ -23,8 +23,6 @@ namespace ShoppersChoice.API.Controllers
             "Pending", "Processing", "Shipped", "Delivered", "Cancelled"
         };
 
-     
-
         private readonly IOrderRepos _orderRepos;
 
         public OrderController(IOrderRepos orderRepos)
@@ -40,7 +38,7 @@ namespace ShoppersChoice.API.Controllers
         {
             try
             {
-               var order = _orderRepos.GetOrders();
+               var order = await _orderRepos.GetOrders();
               
                return Ok(order);
             }
