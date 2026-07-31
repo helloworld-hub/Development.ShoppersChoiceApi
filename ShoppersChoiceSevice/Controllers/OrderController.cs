@@ -71,5 +71,47 @@ namespace ShoppersChoice.API.Controllers
             }
         }
 
+        // PUT: api/orders/{id}/cancel
+        // Cancels an order that hasn't shipped yet
+        [HttpPut("cancel/{id}")]
+        public async Task<IActionResult> CancelOrder(int id)
+        {
+            try
+            {
+                var order = await _orderRepos.CancelOrder(id);
+                return Ok(order);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        // GET: api/orders/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<OrderResponseDto>> GetOrderById(int id)
+        {
+            try
+            {
+                var order = await _orderRepos.GetOrderByIdAsync(id);
+                return Ok(order);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = "An error occurred",
+                    error = ex.Message
+                });
+            }
+        }
     }
 }

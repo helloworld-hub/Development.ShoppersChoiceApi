@@ -14,5 +14,10 @@ namespace ShoppersChoice.DataAccess.Contracts
       Task<List<OrderResponseDto>> GetOrders();
 
       Task<CreateOrderResult> CreateOrderAsync(CreateOrderDto dto);
+
+      Task<OrderResponseDto> CancelOrder(int id);
+
+        Task<OrderResponseDto> GetOrderByIdAsync(int id);
+
     }
 }

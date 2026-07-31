@@ -103,6 +103,64 @@ namespace ShoppersChoice.DataAccess.Repository
             };
         }
 
+
+        public async Task<OrderResponseDto> CancelOrder(int id)
+        {
+            int userId = GetUserId();
+
+            var order = await _context.Orders
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .FirstOrDefaultAsync(o => o.Id == id && o.UserId == userId);
+
+            if (order == null)
+            {
+                throw new KeyNotFoundException("Order not found");
+            }
+
+            if (order.Status == "Shipped" || order.Status == "Delivered")
+            {
+                throw new InvalidOperationException($"Order cannot be cancelled once it is {order.Status}");
+            }
+
+            if (order.Status == "Cancelled")
+            {
+                throw new InvalidOperationException("Order is already cancelled");
+            }
+
+            // Restock the cancelled items
+            foreach (var item in order.OrderItems)
+            {
+                if (item.Product?.stock != null)
+                {
+                    item.Product.stock += item.Quantity;
+                }
+            }
+
+            order.Status = "Cancelled";
+
+            await _context.SaveChangesAsync();
+
+            return MapToDto(order);
+        }
+
+        public async Task<OrderResponseDto> GetOrderByIdAsync(int id)
+        {
+            int userId = GetUserId();
+
+            var order = await _context.Orders
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .FirstOrDefaultAsync(o => o.Id == id && o.UserId == userId);
+
+            if (order == null)
+            {
+                throw new KeyNotFoundException("Order not found");
+            }
+
+            return MapToDto(order);
+        }
+
         #region Helper Methods
 
         private static OrderResponseDto MapToDto(Order order)
