@@ -16,16 +16,20 @@ namespace ShoppersChoiceSevice.Controllers
         private readonly MySQLDBContext mySQLDBContext;
 
         private readonly IProductRepos productRepos;
-        public ProductController(MySQLDBContext mySQLDBContext, IProductRepos productRepos)
+
+        private readonly ILogger<ProductController> _logger; 
+        public ProductController(MySQLDBContext mySQLDBContext, IProductRepos productRepos, ILogger<ProductController> _logger)
         {
             this.mySQLDBContext = mySQLDBContext;
             this.productRepos = productRepos;
+            this._logger = _logger;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetProductsAsync()
         {
             var result = await mySQLDBContext.Products.ToListAsync();
+            _logger.LogInformation($"Products retrieved successfully. , {result.ToList()}");
             return Ok(result);
         }
 
