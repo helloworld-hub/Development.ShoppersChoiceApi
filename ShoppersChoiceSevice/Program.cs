@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using ShoppersChoice.DataAccess.Contracts;
 using ShoppersChoice.DataAccess.NewFolder1;
 using ShoppersChoice.DataAccess.NewFolder2;
@@ -101,6 +102,18 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File(
+    path: Path.Combine(Directory.GetCurrentDirectory(), "Logs", "ShopppersChoiceLogs.txt"),
+    rollingInterval: RollingInterval.Day)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 

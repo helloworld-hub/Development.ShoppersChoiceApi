@@ -14,7 +14,12 @@ namespace ShoppersChoice.DataAccess.Repository
     {
         private readonly MySQLDBContext _context;
 
-        private readonly IHttpContextAccessor _httpContextAccessor; 
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        private static readonly string[] ValidStatuses =
+        {
+            "Pending", "Processing", "Shipped", "Delivered", "Cancelled"
+        };
         public OrderRepos(MySQLDBContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
@@ -157,6 +162,35 @@ namespace ShoppersChoice.DataAccess.Repository
             {
                 throw new KeyNotFoundException("Order not found");
             }
+
+            return MapToDto(order);
+        }
+
+        public async Task<OrderResponseDto> UpdateOrderStatus(int id, OrderStatusUpdateDto dto)
+        {
+            if (!ValidStatuses.Contains(dto.Status))
+            {
+                throw new ArgumentException($"Status must be one of: {string.Join(", ", ValidStatuses)}");
+            }
+
+            var order = await _context.Orders
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .FirstOrDefaultAsync(o => o.Id == id);
+
+            if (order == null)
+            {
+                throw new KeyNotFoundException("Order not found");
+            }
+
+            order.Status = dto.Status;
+
+            if (dto.Status == "Delivered")
+            {
+                order.DeliveryDate = DateTime.Now;
+            }
+
+            await _context.SaveChangesAsync();
 
             return MapToDto(order);
         }

@@ -18,11 +18,6 @@ namespace ShoppersChoice.API.Controllers
     [Authorize]  // All endpoints require authentication
     public class OrderController : ControllerBase
     {
-        private static readonly string[] ValidStatuses =
-        {
-            "Pending", "Processing", "Shipped", "Delivered", "Cancelled"
-        };
-
         private readonly IOrderRepos _orderRepos;
 
         public OrderController(IOrderRepos orderRepos)
@@ -99,6 +94,32 @@ namespace ShoppersChoice.API.Controllers
             {
                 var order = await _orderRepos.GetOrderByIdAsync(id);
                 return Ok(order);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = "An error occurred",
+                    error = ex.Message
+                });
+            }
+        }
+
+        [HttpPut("{id}/status")]
+        public async Task<ActionResult<OrderResponseDto>> UpdateOrderStatus(int id, OrderStatusUpdateDto dto)
+        {
+            try
+            {
+                var order = await _orderRepos.UpdateOrderStatus(id, dto);
+                return Ok(order);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
             }
             catch (KeyNotFoundException ex)
             {
